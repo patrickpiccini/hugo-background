@@ -10,6 +10,10 @@ paginate  = 10
 rssLimit  = 10  # Maximum number of items in the RSS feed.
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
 
+[taxonomies]
+  tag      = "tags"
+  category = "categories"
+
 [params]
   dateform        = "Jan 2, 2006"
   dateformShort   = "Jan 2"
@@ -17,26 +21,18 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
   dateformNumTime = "2006-01-02 15:04"
 
 
+
   # Home subtitle of the index page.
-  #
   homeSubtitle = "Find me"
-
-
-  # Global language menu
-  #
-  # Enables the global language menu.
-  #
-  # enableGlobalLanguageMenu = true
-
 
   [params.logo]
     logoMark     = ">"
-    logoText     = "/home/patrick_piccini"
+    logoText     = "/home/piccini"
     logoHomeLink = "/"
     # Set true to remove the logo cursor entirely.
     # logoCursorDisabled = false
     # Set to a valid CSS color to change the cursor in the logo.
-     logoCursorColor    = "#67a2c9"
+    logoCursorColor    = "#67a2c9"
     # Set to a valid CSS time value to change the animation duration, "0s" to disable.
     # logoCursorAnimate  = "2s"
 
