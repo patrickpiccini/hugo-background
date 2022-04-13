@@ -1,0 +1,78 @@
+baseURL = "https://patrickpiccini.github.io"
+title   = "Patrick Piccini"
+languageCode = "en-us"
+theme = "hello-friend-ng"
+
+PygmentsCodeFences = true
+PygmentsStyle = "monokai"
+
+paginate  = 10
+rssLimit  = 10  # Maximum number of items in the RSS feed.
+copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
+
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04"
+
+
+  # Home subtitle of the index page.
+  #
+  homeSubtitle = "Find me"
+
+
+  # Global language menu
+  #
+  # Enables the global language menu.
+  #
+  # enableGlobalLanguageMenu = true
+
+
+  [params.logo]
+    logoMark     = ">"
+    logoText     = "/home/patrick_piccini"
+    logoHomeLink = "/"
+    # Set true to remove the logo cursor entirely.
+    # logoCursorDisabled = false
+    # Set to a valid CSS color to change the cursor in the logo.
+     logoCursorColor    = "#67a2c9"
+    # Set to a valid CSS time value to change the animation duration, "0s" to disable.
+    # logoCursorAnimate  = "2s"
+
+
+  # Social icons
+  [[params.social]]
+    name = "email"
+    url  = "mailto:patrickpiccin@hotmail.com"
+
+  [[params.social]]
+    name = "github"
+    url  = "https://github.com/PatrickPiccini"
+
+  [[params.social]]
+    name = "linkedin"
+    url  = "https://www.linkedin.com/in/patrick-berlatto-piccini-8414a91a7/"
+
+
+# [languages]
+#  [languages.en]
+#    subtitle  = "Hello Friend NG Theme"
+#    weight    = 1
+#    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+    
+
+
+[menu]
+  [[menu.main]]
+    identifier = "whoami"
+    name       = "Whoami"
+    url        = "about/"
+  [[menu.main]]
+    identifier = "posts"
+    name       = "Posts"
+    url        = "posts/"
+  [[menu.main]]
+    identifier = "codes"
+    name       = "Codes"
+    url        = "codes/"

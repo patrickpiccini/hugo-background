@@ -1,0 +1,4 @@
+[submodule "picciniblog/public"]
+	path = picciniblog/public
+	url = https://github.com/patrickpiccini/patrickpiccini.github.io.git
+	branch = main
