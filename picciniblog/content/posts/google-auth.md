@@ -143,9 +143,9 @@ Ao abrir o arquivo, deve-se fazer uma sequência de importações das biblioteca
 
 ~~~python
 import base64
-from email import errors
 from quickstart import authenticator
 from email.mime.text import MIMEText
+from googleapiclient.errors import HttpError
 ~~~
 
 Nota-se que foi importado a _def authenticator_ do arquivo _GoogleAuthenticator.py ._
@@ -170,7 +170,7 @@ message = MIMEText('Python Mail test using API Google')
 message['from'] = "your_email@gmail.com"
 message['to'] = 'recipient@gmail.com'
 message['subject'] = 'API Google'
-raw_string = base64.urlsafe_b64encode(message.as_string())
+raw_string = base64.urlsafe_b64encode(message.as_bytes()).decode()
 ~~~
 
 Nesse momento é executado o envio do email passando o response da autenticação que está contida na variavel _service_, e os demais dados preenchidos. Todas essas informações foram codificadas em base64 para facilitar a transferência na Internet.
@@ -179,7 +179,7 @@ Nesse momento é executado o envio do email passando o response da autenticaçã
 try:
     message = service.users().messages().send(userId='me', body={'raw': raw_string}).execute()
     print ('Message Id: {}').format(message['id'])
-except errors.HttpError as error:
+except HttpError as error:
      print ('An error occurred: {}').format(error)
 
 ~~~
@@ -203,7 +203,7 @@ Após isso a conexão será autenticada e o email será enviado ao destinatário
 ![img5](/images/google-auth/img5.png)
 
 ## Código Completo
-[Code - Email com Google Authentication](/codes)
+[Code - Email com Google Authentication](https://github.com/patrickpiccini/email-google-auth)
 
 ## Conclusão
 

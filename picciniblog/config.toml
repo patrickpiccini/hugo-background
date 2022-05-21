@@ -10,6 +10,28 @@ paginate  = 10
 rssLimit  = 10  # Maximum number of items in the RSS feed.
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
 
+
+archetypeDir = "archetypes"
+contentDir   = "content"
+dataDir      = "data"
+layoutDir    = "layouts"
+publishDir   = "public"
+
+buildDrafts  = false
+buildFuture  = false
+buildExpired = false
+canonifyURLs = true
+
+enableRobotsTXT = true
+enableGitInfo   = false
+enableEmoji     = true
+enableMissingTranslationPlaceholders = false
+disableRSS     = false
+disableSitemap = false
+disable404     = false
+disableHugoGeneratorInject = false
+
+
 [taxonomies]
   tag      = "tags"
   category = "categories"
@@ -23,7 +45,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
 
 
   # Home subtitle of the index page.
-  homeSubtitle = "Find me"
+  homeSubtitle = "Software Engineer | Back-End Developer"
 
   [params.logo]
     logoMark     = ">"
