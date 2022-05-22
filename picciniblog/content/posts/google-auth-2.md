@@ -1,7 +1,7 @@
 ---
 author:
   name: "Patrick Piccini"
-date: 2022-04-12T21:00:50-03:00
+date: 2022-05-22T19:00:00-03:00
 linktitle: Email com Google Authentication – Refersh Token
 type:
 - post
