@@ -2,11 +2,11 @@
 author:
   name: "Patrick Piccini"
 date: 2022-05-22T18:00:00-03:00
-linktitle: Email com Google Authentication – Refersh Token
+linktitle: Email com Google Authentication – Refresh Token
 type:
 - post
 - posts
-title: Email com Google Authentication – Refersh Token
+title: Email com Google Authentication – Refresh Token
 weight: 10
 ---
 
