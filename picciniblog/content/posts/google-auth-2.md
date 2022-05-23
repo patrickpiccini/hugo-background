@@ -26,11 +26,11 @@ weight: 10
 
 ## Introdução 
 
-Nesse artigo irei continuar o assunto abordado da publicação [Email com Google Authentication](https://patrickpiccini.github.io/posts/google-auth/).
+Nesse artigo irei continuar o assunto abordado na publicação [Email com Google Authentication](https://patrickpiccini.github.io/posts/google-auth/).
 
-Visto que no primeiro estágio fizemos apenas uma autenticação, nos deparamos com a criação de um arquivo chamado _token.json._ Nele, está contido uma sequência de informações sendo elas um token de autenticação, algumas informações do usuário autenticado, e uma data de expiração. Então, quando o usuário utilizar a aplicação que criamos, ele não utilizará mais o arquivo _credentias.json_ e utilizará as informações contidas no _token.json._
+Visto que no primeiro estágio fizemos apenas uma autenticação, nos deparamos com a criação de um arquivo chamado _token.json._ Nele, está contido uma sequência de informações, sendo elas um token de autenticação, algumas informações do usuário autenticado, e uma data de expiração. Então, quando o usuário utilizar a aplicação que criamos, ele não utilizará mais o arquivo _credentias.json_, mas sim as informações contidas no _token.json._
 
-As informações contidas do _token.json_ será semelhantes dados abaixo.
+As informações contidas do _token.json_ serão semelhantes aos dados abaixo.
 
 ~~~json
 {
@@ -44,9 +44,9 @@ As informações contidas do _token.json_ será semelhantes dados abaixo.
 }
 ~~~
 
-Como podemos notar, esse token que é nos retornado há uma data de expiração. E caso o usuário fique enviando vários e-mails durante o dia, terá que passar pela tela de autenticação varias e varias vezes, sendo que a google disponibiliza apenas 4 horas de validade para cada token.
+Como podemos notar, nesse token que nos é retornado há uma data de expiração. Caso o usuário fique enviando vários e-mails durante o dia, terá que passar pela tela de autenticação inumeras vezes, sendo que a Google disponibiliza apenas 4 horas de validade para cada token.
 
-Visto isso utilizaremos uma informação contida no _token.json_ chamda &quot;refresh\_token&quot;. Com ela, conseguimos criar um novo token de acesso, sem que o usuário precise passar pela tela do browser.
+Visto isso, utilizaremos uma informação contida no _token.json_ chamada refresh\_token. Com ela, conseguimos criar um novo token de acesso, sem que o usuário precise passar pela tela do browser.
 
 ### Pré-requisitos
 
@@ -54,7 +54,7 @@ Visto isso utilizaremos uma informação contida no _token.json_ chamda &quot;re
 
 - Gerenciamento de pacotes [PIP](https://pypi.org/project/pip/);
 
-- Ter seguido criado o código baseado no primeiro artigo publicado ([Email com Google Authentication](https://patrickpiccini.github.io/posts/google-auth/)).
+- Ter criado o código baseado no primeiro artigo publicado ([Email com Google Authentication](https://patrickpiccini.github.io/posts/google-auth/)).
 
 ### Step 1 – Instalação de bibliotecas
 
@@ -64,9 +64,9 @@ pip install --upgrade jsonlib DateTime requests
 
 ### Step 2 – Leitura do token.json
 
-Para entender quando iremos criar um novo token de acesso, iremos nos basear pela data de expiração contida no arquivo. Será necessário apontarmos uma variável chamada _date\_time\_now_, que irá conter a data/hora atual. Após isso, iremos ler esse o _token.json,_ e verificar se a data/hora atual é maior que a data de expiração. Caso seja iremos invocar uma função chamada de _refresh\_token._
+Para entender quando iremos criar um novo token de acesso, nos basear pela data de expiração contida no arquivo. Será necessário apontarmos uma variável chamada _date\_time\_now_, que irá conter a data/hora atual. Após isso, iremos ler esse _token.json,_ e verificar se a data/hora atual é maior que a data de expiração. Caso sejam, invocaremos uma função chamada de _refresh\_token._
 
-Todas as informações lidas do arquivo _token.json_ será atribuída a variável _Info\_json,_ que passaremos como parâmetro para a nova função criada.
+Todas as informações lidas do arquivo _token.json_ serão atribuída à variável _Info\_json,_ que passaremos como parâmetro para a nova função criada.
 
 ~~~python
     if os.path.exists('token.json'):
@@ -82,7 +82,7 @@ Todas as informações lidas do arquivo _token.json_ será atribuída a variáve
 
 ### Step 3 – Função refresh\_token
 
-A função refresh\_token será responsável por requisitar a API do Google um novo token de acesso. Dentro dessa função será feita toda a manipulação de requisição de um novo token, adição de horas de expiração, e escrita das novas informações dentro do arquivo já existente _token.json._
+A função refresh\_token será responsável por requisitar à API do Google um novo token de acesso. Dentro dessa função será feita toda a manipulação de requisição de um novo token, adição de horas de expiração, e escrita das novas informações dentro do arquivo já existente _token.json._
 
 Primeiramente precisaremos criar o corpo da requisição, seguindo alguns padrões exigidos.
 
@@ -97,9 +97,9 @@ def refresh_token(info_json):
         }
 ~~~
 
-Logo abaixo, vamos reservar uma variável chamada _refresh\_credentials_ que iremos passar outra função que criaremos posteriormente nomeada de _request\_refresh\_token_ passando como parâmetro as informações que criamos na variável _refresh\_token\_obj._
+Logo abaixo, vamos reservar uma variável chamada _refresh\_credentials_. para ela, posteriormente atribuiremos uma nova função nomeada de _request\_refresh\_token_, passando como parâmetro as informações que criamos na variável _refresh\_token\_obj._
 
-Após isso, a função _request\_refresh\_token_ retornará um, response. Iremos carregar as informações em formato json na variável _refresh\_toke\_obj._ Separaremos mais duas informações, uma variável contendo a soma do horário atual + 4 horas, visto que o token é valido pro quatro horas, e também o token de acesso retornado da requisição _refresh\_credentials._
+Após isso, a função _request\_refresh\_token_ retornará um response. Iremos carregar as informações em formato json na variável _refresh\_toke\_obj._ Separaremos mais duas informações, uma variável contendo a soma do horário atual + 4 horas, visto que o token é válido por quatro horas, e também o token de acesso retornado da requisição _refresh\_credentials._
 
 ~~~ python
    refresh_credentials = request_refresh_token(refresh_token_obj)
@@ -109,7 +109,7 @@ Após isso, a função _request\_refresh\_token_ retornará um, response. Iremos
         access_token = refresh_toke_obj['access_token']
 ~~~
 
-Por fim, uma exception da função caso de ocorra alguma falha em alguma dessas informações que manipulamos.
+Por fim, uma exception da função caso ocorra falha em alguma dessas informações que manipulamos.
 
 ~~~ python
     except Exception as error:
@@ -118,7 +118,7 @@ Por fim, uma exception da função caso de ocorra alguma falha em alguma dessas 
 
 ### Step 4 – Função request\_refresh\_token
 
-O que faremos agora será a função que foi citada anteriormente, _a request\_refresh\_token._ Nela iremos apenas fazer uma requisição post para a url &quot;[https://oauth2.googleapis.com/token](https://oauth2.googleapis.com/token)&quot;, passando as informações que montamos na variável _refresh\_token\_obj_ anteriormente.
+O que abordaremos agora será a função itada anteriormente, _a request\_refresh\_token._ Nela, iremos apenas fazer uma requisição post para a url [https://oauth2.googleapis.com/token](https://oauth2.googleapis.com/token), passando as informações que montamos na variável _refresh\_token\_obj_ anteriormente.
 
 ~~~python
 def request_refresh_token(refresh_token_obj):
@@ -126,7 +126,7 @@ def request_refresh_token(refresh_token_obj):
         return requests.post('https://oauth2.googleapis.com/token', data=refresh_token_obj)
 ~~~
 
-E finalizaremos com uma sequência de possíveis exceções que podem ocorrem na requisição.
+Assim, finalizaremos com uma sequência de possíveis exceções que podem ocorrem na requisição.
 
 ~~~python
     except requests.exceptions.Timeout as e:
@@ -155,11 +155,11 @@ Como meu aplicativo não foi publicado, irá aparecer uma tela de verificação 
 
 ![img4](/images/google-auth/img4.png)
 
-Após isso a conexão será autenticada e o email será enviado ao destinatário.
+Após isso, a conexão será autenticada e o email será enviado ao destinatário.
 
 ![img5](/images/google-auth/img5.png)
 
-Após o usuário passar por esse estágio de autenticação, não precisará mais refazer todos esses passos visto que a atualização que fizemos no código já irá gerar novos tokens automaticamente.
+Depois de o usuário passar por esse estágio de autenticação, não precisará mais refazer todos esses passos, visto que a atualização que fizemos no código já irá gerar novos tokens automaticamente.
 
 ### Código Completo
 
@@ -167,7 +167,7 @@ Após o usuário passar por esse estágio de autenticação, não precisará mai
 
 ## Conclusão
 
-Nesse artigo abordamos a segunda etapa para aplicação de autenticação utilizando Gmail API. Foi mostrado como verificar a validade do token de acesso através da data de expiração. Caso esse token não seja mais valido, criamos duas novas funções chamadas de _refresh\_token_ e _request\_refresh\_token_, responsáveis por requisitar um novo token de acesso, e inseri-lo no arquivo _token.json_ com uma nova data de expiração. Assim o usuário não precisará ficar passando pelas telas de Login com o Google diversas vezes no dia. Tudo isso a nova atualização no código, fará em back-end para o usuário.
+Nesse artigo abordamos a segunda etapa para aplicação de autenticação utilizando Gmail API. Foi mostrado como verificar a validade do token de acesso através da data de expiração. Caso esse token esteja expirado, criamos duas novas funções chamadas de _refresh\_token_ e _request\_refresh\_token_, responsáveis por requisitar um novo token de acesso, e inseri-lo no arquivo _token.json_ com uma nova data de expiração. Assim, o usuário não precisará ficar passando pelas telas de Login com o Google diversas vezes ao dia. Tudo isso a nova atualização no código fará em back-end para o usuário.
 
 Reforçando o que citei no artigo anterior: Existem outros métodos de autenticação de usuário, e diferentes formas de desenvolver o código para a autenticação, basta saber fazer a procura certa no google que encontrará.
 

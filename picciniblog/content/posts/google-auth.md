@@ -198,7 +198,7 @@ Como meu aplicativo não foi publicado, irá aparecer uma tela de verificação 
 
 ![img4](/images/google-auth/img4.png)
 
-Após isso a conexão será autenticada e o email será enviado ao destinatário.
+Após isso, a conexão será autenticada e o email será enviado ao destinatário.
 
 ![img5](/images/google-auth/img5.png)
 
