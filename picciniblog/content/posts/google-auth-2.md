@@ -10,6 +10,8 @@ title: Email com Google Authentication – Refersh Token
 weight: 10
 ---
 
+![refresh_token](/images/google-auth/refresh_token.png)
+
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Introdução](#introdu%C3%A7%C3%A3o)
@@ -25,6 +27,7 @@ weight: 10
 ---
 
 ## Introdução 
+
 
 Nesse artigo irei continuar o assunto abordado na publicação [Email com Google Authentication](https://patrickpiccini.github.io/posts/google-auth/).
 

@@ -24,6 +24,7 @@ weight: 10
 - [Referências](#refer%C3%AAncias)
 ---
 
+
 ## Introdução 
 
 Nesse artigo irei abordar uma situação que recentemente a Google publicou referente ao login a conta Google, utilizando somente o usuário e senha para se conectar em apps de terceiros. Segue um trecho da publicação:
