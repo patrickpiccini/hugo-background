@@ -13,7 +13,6 @@ weight: 10
 ![refresh_token](/images/google-auth/refresh_token.png)
 
 ## Table of Contents
-- [Table of Contents](#table-of-contents)
 - [Introdução](#introdu%C3%A7%C3%A3o)
     - [Pré-requisitos](#pr%C3%A9-requisitos)
 - [Step 1 – Instalação de bibliotecas](#step-1--instala%C3%A7%C3%A3o-de-bibliotecas)
