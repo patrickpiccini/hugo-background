@@ -282,9 +282,9 @@ chart.set_xticklabels(chart.get_xticklabels(), size=10)
 chart.set(title='Top 10 Músicas')
 musicas_top_10
 ~~~ 
-![img8](/images/spotify_wrapped/img7.png)
+![img8](/images/spotify_wrapped/img8.png)
 --
-![graf4](/images/spotify_wrapped/graf3.png)
+![graf4](/images/spotify_wrapped/graf4.png)
 
 ## Storytelling
 Na etapa de storytelling, buscamos organizar as conclusões que temos dos dados, através de um formato de história, para facilitar a transmissão do conhecimento.
