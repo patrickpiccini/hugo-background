@@ -1,14 +1,15 @@
 ---
 author:
   name: "Patrick Piccini"
-date: 2022-05-26T9:50:50-03:00
-linktitle: Data Science - Spotify Wrapped
+date: 2022-05-23T9:50:50-03:00
+linktitle: Data Analytcs - Spotify Wrapped
 type:
 - post
 - posts
-title: Data Science - Spotify Wrapped
+title: Data Analytcs - Spotify Wrapped
 weight: 10
 ---
+![data-analytics](/images/spotify_wrapped/data-analytics.jpg)
 
 ## Table of Contents
 
@@ -28,7 +29,7 @@ weight: 10
 
 ## Projeto Spotify Wrapped 
 
-Recentemente venho estudando a área de Data Science, Data Analytics e as várias derivações de inteligência artificial, e descobri um grande interesse por esse mundo. Foi então que decidi inicia pequeno projeto onde eu possa praticar meus conhecimentos aprendidos, e também mostrar como o nosso cotidiano está repleto de tecnologia aplicada sobre inteligência artificial.
+Recentemente venho estudando a área de Data Analytics, Data Science e as várias derivações de inteligência artificial, e descobri um grande interesse por esse mundo. Foi então que decidi iniciar um pequeno projeto onde eu possa praticar meus conhecimentos adquiridos, e também mostrar como o nosso cotidiano está repleto de tecnologia aplicada sobre inteligência artificial.
 
 O que iremos aprender:
 - Extração
