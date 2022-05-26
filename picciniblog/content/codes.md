@@ -13,4 +13,7 @@ weight: 10
 ## 2022
 
 -  [Code - Email com Google Authentication](https://github.com/patrickpiccini/email-google-auth) 
+---
 -  [Code - Email com Google Authentication – Refresh Token](https://github.com/patrickpiccini/email-google-auth-2)
+---
+-  [Data Analytcs - Spotify Wrapped](https://github.com/patrickpiccini/DataScience_Spotify_Wrapped)
