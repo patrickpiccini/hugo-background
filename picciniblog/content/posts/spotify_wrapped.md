@@ -1,7 +1,7 @@
 ---
 author:
   name: "Patrick Piccini"
-date: 2022-05-26T9:50:50-03:00
+date: 2022-05-26T9:00:50-03:00
 linktitle: Data Analytcs - Spotify Wrapped
 type:
 - post
