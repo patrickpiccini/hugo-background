@@ -18,7 +18,7 @@ weight: 10
 - [Resumo](#resumo)
 ---
 
-Com a finalização do MS1, agora vamos criar o segundo microservice onde será o responsável por criar a manipular as orders relacionada a um usuário. A arquitetura de pastas será semelhante ao microservice 1, contendo _requirements_, _dockerfile_, _docker-compose_, pasta de _config_ e mais algumas coisas.
+Com a finalização do MS1, vamos criar o segundo microservice que será o responsável por criar a manipular as orders relacionada a um usuário. A arquitetura de pastas será semelhante ao microservice 1, contendo _requirements_, _dockerfile_, _docker-compose_, pasta de _config_ e mais algumas coisas.
 
 Na pasta raiz da aplicação MS-Application, vamos criar os seguintes arquivos:
 
@@ -38,11 +38,11 @@ MS-application
 
 ## Config
 
-Como no primeiro microsserviço, os arquivos de conexão serão exatamente iguais, então apenas iremos copiar e colar a pasta **config** para o MS2. Nela, deve conter _database\_connection.py_ e _rabbitmq\_connection.py_ para a conexão com os serviços.
+Como no primeiro microsserviço, os arquivos de conexão serão exatamente iguais, então apenas copiaremos e colararemos a pasta **config** para o MS2. Nela, deve conter _database\_connection.py_ e _rabbitmq\_connection.py_ para a conexão com os serviços.
 
 ## Requeriments
 
-No arquivo _requeriments.txt_ irão ficar todas as instalações de bibliotecas e framework que será utilizado na aplicação do microservices. As bibliotecas devem ficar separadas por linha, visto que usaremos um comando para uma instalação recursiva.
+No arquivo _requeriments.txt_ ficarão todas as instalações de bibliotecas e framework que serão utilizados na aplicação do microservices. As bibliotecas devem ficar separadas por linha, visto que usaremos um comando para uma instalação recursiva.
 
 ~~~ requirements
 psycopg2-binary
@@ -56,7 +56,7 @@ pip install -r requeriments.txt
 
 ## Docker-Compose
 
-No arquivo _docker-compose-microservice2.yml,_ iremos configurar a inicialização da imagem do serviço. Será feito o Build da imagem que criaremos posteriormente, apontado a Network que criamos juntamente com os serviços logo no início do projeto.
+No arquivo _docker-compose-microservice2.yml,_ iremos configurar a inicialização da imagem do serviço. Será feito o Build da imagem que criaremos posteriormente, apontado a Network que criamos juntamente aos serviços logo no início do projeto.
 
 ~~~ docker
 version: "3.7"
@@ -73,7 +73,7 @@ networks:
 
 ## Dockerfile
 
-No arquivo Dockerfile iremos configurar a imagem do microservice, contendo as variáveis de ambiente adequadas para o serviço. Diferente do imagem do python que usamos na API, no microservice precisaremos instalar a imagem completa do python, sendo ela: python:3.8
+No arquivo Dockerfile configuraremos a imagem do microservice, contendo as variáveis de ambiente adequadas para o serviço. Diferente da imagem do python que usamos na API, no microservice precisaremos instalar a imagem completa do python, sendo ela: python:3.8.
 
 ~~~ docker
 FROM python:3.8
@@ -105,9 +105,9 @@ class Main():
         self.RMQ_WORKER = RabbitWorker()
 ~~~
 
-Feito isso, criaremos um método chamado _consume\_queue,_ que consumirá a fila que desejamos. Nesse caso será _order,_ e posterior o consumo, irá disparar uma função para o processamento do dado recebido da fila. Nesse momento não iremos criar a função de processamento, porem iremos apenas nomeá-la no lugar correto.
+Feito isso, criaremos um método chamado _consume\_queue,_ que consumirá a fila que desejamos. Nesse caso será _order,_ e posterior o consumo, irá disparar uma função para o processamento do dado recebido da fila. Nesse momento não iremos criar a função de processamento, porém iremos apenas nomeá-la no lugar correto.
 
-Com o comando _basic\_consume_ iremos consumir a fila _order_, no on\_message\_callback será disparado a função para o processamento da informação recebida na fila.
+Com o comando _basic\_consume_ consumiremos a fila _order_, e no on\_message\_callback será disparado a função para o processamento da informação recebida na fila.
 
 Com o comando _start\_consuming,_ é processado o evento de I/O até que todos as mensagens sejam processadas.
 
@@ -131,4 +131,4 @@ if __name__ == '__main__':
 
 ## Resumo
 
-Nesse Step, criamos o microservice 2 para o processamento dos dados recebidos através da fila de order. Copiamos os arquivos de conexão _database\_connection.py_ e _rabbitmq\_connection.py_ do Microservice 1, visto que é a mesma conexão que precisaremos fazer. Também criamos o arquivo _main.py_ que será o responsável por inicializar o serviço e disparar o método _consume\_queue,_ que como o próprio nome diz, irá consumir a fila de usuários.
+Nesse Step, criamos o microservice 2 para o processamento dos dados recebidos através da fila de order. Copiamos os arquivos de conexão _database\_connection.py_ e _rabbitmq\_connection.py_ do Microservice 1, visto que é a mesma conexão que precisaremos fazer. Também criamos o arquivo _main.py_ que será o responsável por inicializar o serviço e disparar o método _consume\_queue,_ que como o próprio nome diz, consumirá a fila de usuários.

@@ -20,9 +20,9 @@ weight: 10
 - [Resumo](#resumo)
 ---
 
-No passo anterior concluímos a arquitetura do Microsserviço 2, e fizemos a conexão com os serviços do Rabbit e Postgres. Agora, vamos fazer a lógica do sistema dos orders, onde iremos diferenciar as interações com o banco de dados através de uma tag, enviada pela API, e dependendo da interação de for solicitada, haverá o acionamento de uma função equivalente a solicitação.
+No passo anterior concluímos a arquitetura do Microsserviço 2, e fizemos a conexão com os serviços do Rabbit e Postgres. Agora, vamos fazer a lógica do sistema dos orders, onde diferenciaremos as interações com o banco de dados através de uma tag, enviada pela API, e dependendo da interação de for solicitada, haverá o acionamento de uma função equivalente a solicitação.
 
-Na pasta raiz da aplicação MS-Application, vamos criar os seguintes arquivos:
+Na pasta raiz da aplicação MS-Application, vamos criar os seguintes arquivos
 
 ~~~ Estrutura
 MS-application
@@ -48,9 +48,9 @@ MS-application
 
 ## Tag API
 
-Antes de começarmos a codar, vamos entender o cenário de onde paramos. Temos uma API que recebe as informações de uma criação de um order, por exemplo, e envia essas informações para o microsserviço. Para o microsserviço entender o que deve ser feita com aquelas informações recebidas, a API deverá envia uma tag juntamente ao corpo das informações, que posteriormente será identificada. Entendendo esse fluxo, vamos voltar ao código da API e fazer essa pequena alteração da inserção da tag.
+Antes de começarmos a codar, vamos entender o cenário onde paramos. Temos uma API que recebe as informações de uma criação de um order, por exemplo, e envia essas informações para o microsserviço. Para o microsserviço entender o que deve ser feito com aquelas informações recebidas, a API deverá envia uma tag juntamente ao corpo das informações, que posteriormente será identificada. Entendendo esse fluxo, vamos voltar ao código da API e fazer essa pequena alteração da inserção da tag.
 
-No arquivo _server.py, vamos_ ao método de criação de usuário que abordamos nos Steps anteriores, e inserir ao payload que recebemos item chamado _type_, com o valor _create\_order_.
+No arquivo _server.py, vamos_ ao método de criação de usuário que abordamos nos Steps anteriores, e inserirmos ao payload que recebemos um item chamado _type_, com o valor _create\_order_.
 
 ~~~ python
 @app.route("/order/create_order/", methods=['POST'])
@@ -79,16 +79,16 @@ O controlador do database será o responsável por fazer o famoso **CRUD.** CRUD
 
 ❌ D: Delete (apagar) - apagar um registro.
 
-No desenvolvimento desse estágio irei mostrar apenas uma interação com o banco de dados, visto que o desenvolvimento é muito verboso, e ficará muito cansativo de ficar lendo todas as manipulações feitas. O que iremos fazer agora será a inclusão de um order ao banco. Para isso devemos inserir as informações através de um comando SQL.
+No desenvolvimento desse estágio mostrarei apenas uma interação com o banco de dados, visto que o desenvolvimento é muito complexo, e a leitura ficará muito maçante. O que faremos agora será a inclusão de um order ao banco. Para isso devemos inserir as informações através de um comando SQL.
 
-Primeiramente devemos importar todas as dependências necessárias, que serão a conexão com o banco, feita no _database\_connection.py,_ e a biblioteca datetime.
+Primeiramente, devemos importar todas as dependências necessárias, que serão a conexão com o banco, feita no _database\_connection.py,_ e a biblioteca datetime.
 
 ~~~ python
 from config.database_connection import ConnectionDatabase
 from datetime import datetime
 ~~~
 
-Vamos criar uma Classe chamada PostgresWorker, com o construtor __init__ contendo a conexão com o banco, captura do horário atual, e a formatação da data.
+Vamos criar uma Classe chamada **PostgresWorker** , com o construtor _\_\_init\_\__ contendo a conexão com o banco, captura do horário atual, e a formatação da data.a.
 
 ~~~ python
     def __init__(self):
@@ -103,13 +103,13 @@ Para entender um pouco melhor sobre a manipulação de datas, confira o tópico 
 
 ## Create\_order
 
-O que faremos agora será criar uma função chamada _create\_order_ onde fará a inserção/criação de um order no nosso banco de dados. O metodo receberá como parâmetro _data_, que serão os dados para fazermos a interação com o banco.
+O que faremos agora será criar uma função chamada _create\_order_ que fará a inserção/criação de um order no nosso banco de dados. O método receberá como parâmetro _data_, que serão os dados para fazermos a interação com o banco.
 
-Devemos verificar antes se existe cadastrado o usuário no banco de dados. Para isso passaremos o nick\_name da pessoa a uma função chamada _information\_user._ Dependendo do retorno, o usuário receberá uma mensagem falando que não existe esse usuário cadastrado no manco de dados.
+Devemos verificar antes se existe cadastrado o usuário no banco de dados. Para isso passaremos o nick\_name da pessoa a uma função chamada _information\_user._ Dependendo do retorno, o usuário receberá uma mensagem informando que não existe esse usuário cadastrado no manco de dados.
 
-Dentro do método também teremos a variável _query\_insert_ que conterá a query para a execução do comando. Na variável _vars\_query_ irá ter as informações recebidas da fila, que serão inseridas da query. O comando _&quot;cursor.execute(query\_update, vars\_query)&quot;_ é responsável pela execução do comando, onde ele irá pegar a _query\_update_, inserir os valores de _vars\_query,_ e executar a instrução. A função _&quot;connection.commit&quot;_ é responsável por fazer as alterações do banco para a persistência do database. E por fim, é retornado alguma informação. Tudo isso ficará dentro de um try-except, para caso haja alguma falha na interação com o banco, seja lançado um except com o erro.
+Dentro do método também teremos a variável _query\_insert_ que conterá a query para a execução do comando. Na variável _vars\_query_ terão as informações recebidas da fila, que serão inseridas da query. A função _&quot;cursor.execute(query\_update, vars\_query)&quot;_ é responsável pela execução do comando, onde pegará a _query\_update_, inserir os valores de _vars\_query,_ e executar a instrução. A função _&quot;connection.commit&quot;_ é responsável por fazer as alterações do banco para a persistência do database. Por fim, é retornado alguma informação. Tudo isso ficará dentro de um try-except, para caso haja alguma falha na interação com o banco, seja lançado um except com o erro.
 
-Como esse caso é apenas uma inserção no banco, apenas retornará uma mensagem ao usuário, porem em casos de retorno de alguma informação do banco ao usuário, essas informações serão passadas no return.
+Como esse caso é apenas uma inserção no banco, apenas retornará uma mensagem ao usuário. Contudo, em casos de retorno de alguma informação do banco ao usuário, essas informações serão passadas no return.
 
 ~~~ python
     # create a order in database
@@ -138,7 +138,7 @@ Como esse caso é apenas uma inserção no banco, apenas retornará uma mensagem
 
 ## List\_all\_orders
 
-Para exemplificar uma situação onde precisamos retornar uma informação do banco de dados para o usuário, vamos criar a função _list\_all\_orders._ A estrutura da função será semelhante a que criamos acima. teremos somente uma query de instrução, que será um select dos _order\_id_ e _item\_description_ de toda a tabela. Será capturada as informações através do comando &quot;cursor.fetchall&quot;, e manipulada os dados recebidos do banco, para mostrar mais organizado ao usuário. Tudo isso ficará dentro de um try-except, para caso haja alguma falha na interação com o banco, seja lançado um except com o erro.
+Para exemplificar uma situação em que precisamos retornar uma informação do banco de dados para o usuário, vamos criar a função _list\_all\_orders._ A estrutura da função será semelhante a que criamos acima. Teremos somente uma query de instrução, que será um select dos _order\_id_ e _item\_description_ de toda a tabela. Serão capturadas as informações através do comando &quot;cursor.fetchall&quot;, e manipuladas aos dados recebidos do banco, para mostrar mais organizado ao usuário. Tudo isso ficará dentro de um try-except, para caso haja alguma falha na interação com o banco, seja lançado um except com o erro.
 
 ~~~ python
 # Show all orders of batabase
@@ -183,7 +183,7 @@ Os métodos precisaremos criar são:
 
 ## Controlador Rabbit
 
-O controlador do rabbit será o responsável por identificar a tag recebida e irá disparar uma função para a interação com o banco de dados. Porem o retorno do bando de dados deve ser retornado também ao usuário que consumiu a API, para isso, iremos publicar esse response através da fila de controle que criamos no Step6.
+O controlador do rabbit será o responsável por identificar a tag recebida e disparará uma função para a interação com o banco de dados. Porém o retorno do bando de dados deve ser retornado também ao usuário que consumiu a API. Para isso, publicaremos esse response através da fila de controle que criamos no Step6.
 
 No arquivo _rabbit\_worker.py_ vamos iniciar importando as dependências.
 
@@ -193,7 +193,6 @@ from database_controller.postgres_worker import PostgresWorker
 ~~~
 
 Vamos criar uma classe chamada **RabbitWorker,** e em seu construtor _\_\_init\_\__ criaremos um atributo vazio chamada _self.data._
-
 ~~~ python
 class RabbitWorker():
 
@@ -201,7 +200,7 @@ class RabbitWorker():
         self.data = ''
 ~~~
 
-Logo abaixo, iremos criar o metodo que chamamos no arquivo _main.py,_ chamado de _call-back._ Ele é o responsável por processar os dados recebidos, e retornar a fila de controle, um response ao usuário. Nos parâmetros iremos deverá ter _ch, method, props_ e _body._ No atributo _self.data_ iremos carregá-lo com as informações recebidas do body. Logo abaixo, criaremos uma variável onde chamaremos o metodo _database\_manipulation(self.data)_ que criaremos posteriormente.
+Logo abaixo, criaremos o método que chamamos no arquivo _main.py,_ chamado de _call-back._ Ele é o responsável por processar os dados recebidos, e retornar à fila de controle, um response ao usuário. Nos parâmetros deverão conter _ch, method, props_ e _body._ No atributo _self.data_ iremos carregá-lo com as informações recebidas do body. Logo abaixo, criaremos uma variável onde chamaremos o método _database\_manipulation(self.data)_ que criaremos posteriormente.
 
 Após isso, através do atributo _ch_, iremos criar a parte da publicação da mensagem de response na fila de controle e dando um ACK na fila de controle.
 
@@ -220,7 +219,7 @@ Após isso, através do atributo _ch_, iremos criar a parte da publicação da m
 
 Como dito anteriormente, agora vamos criar o método _database\_manipulation_, que é responsável por identificar a tag que há no corpo dos dados recebidos da API, e acionar os métodos contidos no arquivo _postgres\_worker.py_ para a fazer a ação solicitada da requisição.
 
-O que iremos fazer é bem simples. Quando for recebido uma mensagem na fila de usuário, a mensagem será consumida. Será identificado o type da mensagem, que no caso é nossa tag, e após isso, chamaremos uma função equivalente ao type, para executar um CRUD no banco de dados.
+O que faremos é bem simples. Quando for recebido uma mensagem na fila de usuário, a mensagem será consumida. Será identificado o type da mensagem, que no caso é nossa tag, e após isso, chamaremos uma função equivalente ao type para executar um CRUD no banco de dados.
 
 Essa identificação será através de um _if-elif_ da informação &quot;type&quot;, contida em data.
 
@@ -254,4 +253,4 @@ Essa identificação será através de um _if-elif_ da informação &quot;type&q
 
 ## Resumo
 
-Nesse passo fizemos uma pequena alteração na API, inserindo uma nova informação no payload que será o ponto crucial para a identificação da ação que deve ser feita no banco de dados. Criamos o database\_worker que há as funções de interação/manipulação do banco de dados, onde foi feito um CRUD. Criamos o rabbit\_worker, que é o responsável por identificar o que está sendo solicitado através da tag, pegar as informações recebidas e utiliza-la nas funções contidas no database\_worker. Por fim, é publicado na fila auxiliar uma mensagem de response, onde o usuário receberá essa informação já processada.
+Nesse passo fizemos uma pequena alteração na API, inserindo uma nova informação no payload que será o ponto crucial para a identificação da ação que deve ser feita no banco de dados. Criamos o database\_worker onde há as funções de interação/manipulação do banco de dados, onde foi feito um CRUD. Criamos o rabbit\_worker, que é o responsável por identificar o que está sendo solicitado através da tag, pegar as informações recebidas e utilizá-las nas funções contidas no database\_worker. Por fim, é publicado na fila auxiliar uma mensagem de response, onde o usuário receberá essa informação já processada..

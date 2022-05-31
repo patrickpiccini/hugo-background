@@ -24,7 +24,7 @@ Findando o nosso projeto, precisaremos ainda aplicar a camada de cache em todas 
 
 ## Instalação
 
-Antes de qualquer coisa, certifique-se te ter instalado todos os módulos contidos no arquivo _requirements.txt_ da API.
+Antes de qualquer coisa, certifique-se de ter instalado todos os módulos contidos no arquivo _requirements.txt_ da API.
 
 ~~~ requirements
    psycopg2-binary
@@ -51,7 +51,7 @@ from config.database_connection import ConnectionDatabase
 
 ## Inicialização do Redis
 
-Dentro da classe _Api\_server_, iremos apontar a conexão com o servidor Redis, visto que já configuramos todas as informações no arquivo _redis\_connection.py_ no Step5, precisaremos chama-las no arquivo da API.
+Dentro da classe _Api\_server_, apontaremos a conexão com o servidor Redis, visto que já configuramos todas as informações no arquivo _redis\_connection.py_ no Step5, precisaremos chama-las no arquivo da API.
 
 ~~~ python
     app = Flask(__name__)
@@ -64,7 +64,7 @@ Dentro da classe _Api\_server_, iremos apontar a conexão com o servidor Redis, 
 
 ## Decorator Cached
 
-Nas rotas que serão retornado alguma informação da banco de dados iremos colocar um novo decorator. Para armazenar funções em cache, usaremos o comando **cached**. Por parâmetro, haverá a opção _timeout_, que será o responsável por manter o cache por determinado tempo, que no nosso caso, será 30 segundos.
+Nas rotas que serão retornadas alguma informação da banco de dados iremos colocar um novo decorator. Para armazenar funções em cache, usaremos o comando **cached**. Por parâmetro, haverá a opção _timeout_, que será o responsável por manter o cache por determinado tempo, que no nosso caso, será 30 segundos.
 
 ~~~ python
 @app.route("/user/show_all_user/", methods=['GET'])
@@ -95,10 +95,12 @@ Fazendo um teste, o ganho é significativo, chegando até ser 20x mais rápido d
 
 ## Microservice Project – Finalização
 
-Durante o desenvolvimento do código, me esbarrei em diversos erros, e problemas que pareciam não ter mais sentido, principalmente nas partes onde precisava fazer algum teste no ambiente da OCI. Como ainda estava aprendendo algumas coisas novas sobre a criação de aplicação em nuvem, passei por problemas essenciais para aprender e entendem como devo arquitetar todo um local de produção. Também, aprendi diversas coisas sobre persistência de dados, e como trabalhar com a manipulações das informações disponibilizada pelo usuário. Sobre Docker, aprendi muito em como criar Docker-Compose, visto que é extremamente importante saber isso para criação de containers rapidamente, e pude ver um pouco mais sobre Dockerfile, e buildar minhas próprias imagens, de acordo com a necessidade da aplicação. Pude me aprofundar na criação e gerenciamento do broker de mensagem utilizando Rabbit, e também em como criar uma estrutura complexa utilizando o conceito RPC(Remote Procedure Call), para o retorno de informações ao requisitor, que no nosso caso é o usuário. Com todos esses aprendizados, pude concluir o objetivo final, que era criar microsserviços independentes, e caso algum deles pare de funcionar, não cause indisponibilidade a todo a aplicação.
+Então, chegamos ao fim desse projeto.
 
-Uma coisa que deixei de fazer nesse projeto, porém, pretendo abordar em outro momento, é a criação de testes unitários, visto que isso é um requisito quase obrigatório no mercado de trabalho dos desenvolvedores. Então, podemos riscar de nosso fluxo de desenvolvimento essa etapa.
+Durante o desenvolvimento do código, me esbarrei em diversos erros e problemas que pareciam não ter mais sentido, principalmente nas partes onde precisava fazer algum teste no ambiente da OCI. Como ainda estava aprendendo algumas coisas novas sobre a criação de aplicação em nuvem, passei por problemas essenciais para aprender e entender como devo arquitetar todo um local de produção. Também aprendi diversas coisas sobre persistência de dados, e como trabalhar com as manipulações das informações disponibilizadas pelo usuário. Sobre Docker, aprendi muito como criar Docker-Compose, visto que é extremamente importante saber isso para criação de containers rapidamente, e pude ver um pouco mais sobre Dockerfile, e buildar minhas próprias imagens, de acordo com a necessidade da aplicação. Pude me aprofundar na criação e gerenciamento do broker de mensagem utilizando Rabbit, e em como criar uma estrutura complexa utilizando o conceito RPC(Remote Procedure Call), para o retorno de informações ao requisitor, que no nosso caso é o usuário. Com todos esses aprendizados pude concluir o objetivo final que era criar microsserviços independentes e caso algum deles pare de funcionar, não cause indisponibilidade a todo a aplicação.
+
+Uma coisa que deixei de fazer nesse projeto, mas que pretendo abordar em outro momento, é a criação de testes unitários, visto que isso é um requisito quase obrigatório no mercado de trabalho dos desenvolvedores. Então, podemos riscar de nosso fluxo de desenvolvimento essa et
 
 ![img37](/images/microservice_project/img37.png)
 
-Espero que tenha aproveitado todo o desenvolvimento do projeto, e que em sua leitura, tenha aprendido alguma coisa nova.
+Espero que tenha aproveitado todo o desenvolvimento do projeto, e que sua leitura tenha agregado conhecimentos.
