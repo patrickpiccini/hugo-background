@@ -17,11 +17,11 @@ weight: 10
 - [Resumo](#resumo)
 ---
 
-Como visto no Step4, foi iniciado os primeiros passos pra interagir com a API gateway, e também, foi criado as configurações para a inicialização do container, quando for subir para a OCI.
+Como visto no Step4, foi iniciado os primeiros passos para interagir com a API gateway, e foi criado as configurações para a inicialização do container, quando for subir para a OCI.
 
-Nesse passo, mostrai como configurar a conexão com os servidores do Rabbit, Redis e Postgres. E como planejei a arquitetura de pastas e módulos, para ter uma aplicação organizada.
+Nesse passo, mostrarei como configurar a conexão com os servidores do Rabbit, Redis e Postgres, e como planejei a arquitetura de pastas e módulos para ter uma aplicação organizada.
 
-Dentro da pasta API, devemos criar uma subpasta chamada config com os seguintes arquivos
+Dentro da pasta API, devemos criar uma subpasta chamada config com os seguintes arquivos:
 
 ~~~ Estrutura
 MS-application
@@ -40,21 +40,20 @@ MS-application
 
 ## Postgres
 
-Antes de continuar, deve-se ter certeza de que executou todas as instalações das bibliotecas, contida no arquivo _requeriments.txt._
+Antes de continuar, deve-se ter certeza de que executou todas as instalações das bibliotecas, contidas no arquivo _requeriments.txt._
 
 Para começarmos, devemos importar os módulos _psycopg2_e _os,_ que iremos utilizar para a conexão.
-
 ~~~ python
 import psycopg2, os
 ~~~
 
-Como teremos que apontar o host do servidor Postgres para nossa aplicação, na criação do Dockerfile foi criado uma variável de ambiente chamada HOST\_DATABASE, contendo o ip privado da instancia da OCI. Porém, essa variável de ambiente só será utilizada em Produção. Sendo assim, criei uma variável dentro do arquivo _database\_connection.py_ contendo o ip público, somente para fins desenvolvimento em Homologação, utilizando os serviços que já estão rodando.
+Como teremos que apontar o host do servidor Postgres para nossa aplicação, na criação do Dockerfile foi criado uma variável de ambiente chamada HOST\_DATABASE, contendo o ip privado da instância da OCI. Porém, essa variável de ambiente só será utilizada em Produção. Sendo assim, criei uma variável dentro do arquivo _database\_connection.py_ contendo o ip público, somente para fins de desenvolvimento em Homologação, utilizando os serviços que já estão rodando.
 
-Já que iremos nos conectar a um banco de dados, essa deve ser uma das primeiras coisas que deve acontecer quando a API for inicializada. Para isso, criaremos uma classe chamada _ConnectionDatabase(),_ onde em seu _\_\_init\_\__ iremos fazer esse processo de conexão.
+Já que nos conectaremos a um banco de dados, essa deve ser uma das primeiras coisas que deve acontecer quando a API for inicializada. Para isso, criaremos uma classe chamada _ConnectionDatabase(),_ onde em seu _\_\_init\_\__ iremos fazer esse processo de conexão.
 
-Dentro da função connect da biblioteca psycopg2, vamos colocar os parâmetros _host,_ que será o ip da instancia OCI, _port_ contendo a numeração padrão da porta postgres(já foi liberada a porta no OCI para a conexão externa), _batabase_, contendo o nome do banco, _user_ e _password,_ contendo usuário e senha que foi colocado na imagem que subimos do postgres.
+Dentro da função connect da biblioteca psycopg2, vamos colocar os parâmetros _host,_ que serão o ip da instancia OCI, _port_ contendo a numeração padrão da porta postgres (já foi liberada a porta no OCI para a conexão externa), _batabase_, contendo o nome do banco, _user_ e _password,_ contendo usuário e senha que foi colocado na imagem que subimos do postgres.
 
-Após o apontamento dos parâmetros obrigatórios para a conexão, iremos criar um atributo chamado _cursor,_ onde ele será o responsável por executar qualquer interação com o banco de dados. Logo abaixo há um método _create\_tables_, que iremos criar logo em seguida. Para finalizar, tudo isso está dentro de um try-except, para caso haja alguma falha na conexão, seja lançado um except com o erro.
+Após o apontamento dos parâmetros obrigatórios para a conexão, criaremos um atributo chamado _cursor,_ que será o responsável por executar qualquer interação com o banco de dados. Logo abaixo há um método _create\_tables_, que criaremos logo em seguida. Para finalizar, tudo isso está dentro de um try-except, para caso haja alguma falha na conexão, seja lançado um except com o erro.
 
 ~~~ python
 # HOST_DATABSE = os.environ['HOST_DATABASE']
@@ -81,17 +80,17 @@ class ConnectionDatabase():
 
 ### Create\_tables
 
-Antes de começar a fazer a função que irá criar as tabelas, vamos analisar o que precisará ser feito com o modelo ER abaixo:
+Antes de começar a fazer a função que criará as tabelas, vamos analisar o que precisará ser feito com o modelo ER abaixo:
 
 ![img27](/images/microservice_project/img27.png)
 
-Iremos criar uma estrutura simples. Serão duas tabelas, _users_ e _orders_. Nelas conterão seus atributos, com seus determinados tipos. Note que na tabela orders, iremos herdar um atributo da tabela user, que será o _user\_id_, onde na tabela user é a PrimaryKey. Já na tabela orders, o atributo herdado _user\_id_, será tratado como uma chave estrangeira (ForeignKey).
+Iremos criar uma estrutura simples. Serão duas tabelas, _users_ e _orders_. Nelas conterão seus atributos, com seus determinados tipos. Note que na tabela orders, iremos herdar um atributo da tabela user, que será o _user\_id_, onde na tabela user é a PrimaryKey. Já na tabela orders, o atributo herdado é o _user\_id_, que será tratado como uma chave estrangeira (ForeignKey).
 
 Em relação a cardinalidade vamos ter 1 usuário pode ter vários orders, e 1 order pode ter somente um usuário, representados pelos símbolos abaixo.
 
 ![img28](/images/microservice_project/img28.jpg)
 
-Após essa análise, devemos criar o método _create­\_table, e criar as tabelas._ Para executar comandos SQL através da biblioteca, basta escrever em uma string o comando SQL que deseja executar, e passar como parâmetro para função _execute._ Visto isso, primeiramente iremos criar um select da versão do Postgres, para que toda a vez que seja iniciado a conexão, seja mostrado a versão. Logo após devemos criar um atributo contendo toda a query de criação das duas tabelas, baseada do modelo ER visto anteriormente. Sendo assim, como método já foi chamado no _\_\_init\_\_,_ será criado as tabelas ao instanciar a classe **ConnectionDatabase** _._
+Após essa análise, devemos criar o método _create­\_table, e criar as tabelas._ Para executar comandos SQL através da biblioteca, basta escrever em uma string o comando SQL que deseja executar, e passar como parâmetro para função _execute._ Visto isso, primeiramente criaremos um select da versão do Postgres, para que toda a vez que seja iniciado a conexão, seja mostrado a versão. Logo após, devemos criar um atributo contendo toda a query de criação das duas tabelas, baseada do modelo ER visto anteriormente. Sendo assim, como método já foi chamado no _\_\_init\_\_,_ será criado as tabelas ao instanciar a classe **ConnectionDatabase**.
 
 ~~~ python
 def create_tables(self):
@@ -136,7 +135,7 @@ def create_tables(self):
 
 O Rabbit é um message borker open source fácil e leve de ser implementado, tanto local, quanto em nuvem. O rabbit suporta vários tipos de protocolo de mensagens, para haver facilidade na comunicação entre aplicações. Existem muitos outros recursos, porém, não irei detalhar eles nesse projeto.
 
-Nesse momento, iremos fazer somente a conexão com o servidor Rabbit, onde usaremos uma variável de ambiente como no postgres, no entanto ela será a HOST, contida no **Dockerfile**. Da mesma forma que na conexão do postgres, criei uma variável estática contendo o ip público, somente para desenvolver a aplicação local, utilizando o servidor que já estão rodando os serviços.
+Nesse momento, faremos somente a conexão com o servidor Rabbit, onde usaremos uma variável de ambiente como no postgres, no entanto ela será a HOST, contida no **Dockerfile**. Da mesma forma que na conexão do postgres, criei uma variável estática contendo o ip público, somente para desenvolver a aplicação local, utilizando o servidor que já estão rodando os serviços.
 
 Começamos com a importação das bibliotecas necessárias e o apontamento da variável com o IP Público da instancia OCI.
 
@@ -149,7 +148,7 @@ import pika, os
 HOST_DATABSE = '144.22.193.219'
 ~~~
 
-Agora iremos criar uma classe chamada _RabbitConnection(),_ e faremos a conexão no método _\_\_init\_\_._ Utilizando o função de conexão da biblioteca pika chamada _BlockingConnection(),_ passaremos como parâmetros, através do metodo _ConnectionParameters()_ o host, contida na variável HOST\_RABBIT, e a porta padrão 5672. Em seguida, será criado um atributo chamado _channel_, que será responsável por executar toda e qualquer interação com o servidor rabbit, tudo isso foi criado em um try-catch, para caso haja alguma falha na conexão, seja lançado um except com o erro.
+Agora iremos criar uma classe chamada _RabbitConnection(),_ e faremos a conexão no método _\_\_init\_\_._ Utilizando o função de conexão da biblioteca pika chamada _BlockingConnection(),_ passaremos como parâmetros, através do metodo _ConnectionParameters()_ o host, contida na variável HOST\_RABBIT, e a porta padrão 5672. Em seguida, será criado um atributo chamado _channel_, que será responsável por executar toda e qualquer interação com o servidor rabbit, tudo isso foi criado em um try-catch, para caso haja alguma falha na conexão, seja lançado um except com o erro
 
 ~~~ python
 class RabbitConnection():
@@ -169,9 +168,9 @@ class RabbitConnection():
 
 Redis é um armazenamento de estrutura de dados na memória de código aberto (licenciado BSD), usado como banco de dados, cache, agente de mensagens e mecanismo de streaming. Um dos serviços que se destaca é o cache, que iremos utilizar nessa aplicação.
 
-Para criar a conexão com o servidor Redis, iremos utilizar a variável de ambiente CACHE\_REDIS\_HOST, porem, para a fim de desenvolvimento, irei criar uma variável local contendo o ip público da instancia.
+Para criar a conexão com o servidor Redis, utilizaremos a variável de ambiente CACHE\_REDIS\_HOST, porém, para a fim de desenvolvimento, criarei uma variável local contendo o ip público da instancia.
 
-Nessa configuração iremos fazer algo um pouco diferente. Como o Redis e Flask conseguem trabalhar junto nativamente, a configuração para a conexão ao servidor, será feita através do arquivo principal _server.py_, porém, será mostrado como fazer isso no próximo passo.
+Nessa configuração, iremos fazer algo um pouco diferente. Como o Redis e Flask conseguem trabalhar juntos ativamente, a configuração para a conexão ao servidor, será feita através do arquivo principal _server.py_. Contudo, será demonstrado como fazer isso no próximo passo.
 
 No momento a configuração será a seguinte: Importar a biblioteca _os,_ criar uma classe chamada _BaseConfig(),_ e dentro dela, apontar as variáveis de ambiente contidas no Dockerfile, veja:
 
@@ -185,7 +184,7 @@ class BaseConfig(object):
     CACHE_REDIS_DB = os.environ['CACHE_REDIS_DB']
 ~~~
 
-Como irei testar localmente para homologação, criarei a mesma classe, porém, com atributos com valor estático do servidor.
+Como testarei localmente para homologação, criarei a mesma classe, porém, com atributos com valor estático do servidor.
 
 ~~~ python
 class BaseConfig(object):
@@ -197,4 +196,4 @@ class BaseConfig(object):
 
 ## Resumo
 
-Nesse Step, criamos as conexões com os servidores Rabbit, Redis e Postgres que já estavam rodando a instancia da OCI. Criamos a conexão com o Postgres. Foi explanado o modelo de entidade relacional que posteriormente o desenvolvemos, criando as devidas tabelas planejadas. Vimos um breve resumo do que é o rabbit e criamos a conexão com o servidor que está rodando na OCI. E por fim, apontado a conexão com o Redis, porém não utilizaremos nesse momento.
+Nesse Step, criamos as conexões com os servidores Rabbit, Redis e Postgres que já estavam rodando a instancia da OCI. Criamos a conexão com o Postgres. Foi explanado o modelo de entidade relacional que posteriormente foi desenvolvido, criando as devidas tabelas planejadas. Vimos um breve resumo do que é o rabbit e criamos a conexão com o servidor que está rodando na OCI. E por fim, apontado a conexão com o Redis, porém não utilizaremos nesse momento.

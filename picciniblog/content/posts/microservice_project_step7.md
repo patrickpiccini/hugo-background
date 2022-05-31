@@ -18,7 +18,7 @@ weight: 10
 - [Resumo](#resumo)
 ---
 
-Agora vamos para um próximo nível da nossa aplicação. Como já temos a API pré-configurada com as filas e as tabelas do banco criados, começaremos a criar os microservices para consumi-las. A arquitetura do serviço será bem semelhante ao que criamos na API, contendo _requirements_, _dockerfile_, _docker-compose_, pasta de _config_ e mais algumas coisas.
+Agora vamos para o próximo nível da nossa aplicação. Como já temos a API pré-configurada com as filas e as tabelas do banco criados, começaremos a criar os microservices para consumi-las. A arquitetura do serviço será bem semelhante ao que criamos na API, contendo _requirements_, _dockerfile_, _docker-compose_, pasta de _config_ e mais algumas coisas.
 
 Na pasta raiz da aplicação MS-Application, vamos criar os seguintes arquivos:
 
@@ -38,11 +38,11 @@ MS-application
 
 ## Config
 
-Na pasta **config** , os arquivos _database\_connection.py_ e _rabbitmq\_connection.py_ são exatamente as mesmas configurações dos arquivos contido na API, então apenas vamos copiar a os arquivos da API.
+Na pasta **config** , os arquivos _database\_connection.py_ e _rabbitmq\_connection.py_ são exatamente as mesmas configurações dos arquivos contido na API, então apenas vamos copiar aos arquivos da API.
 
 ## Requeriments
 
-No arquivo _requeriments.txt_ irão ficar todas as instalações de bibliotecas e framework que será utilizado na aplicação do microservices. As bibliotecas devem ficar separadas por linha, visto que usaremos um comando para uma instalação recursiva.
+No arquivo _requeriments.txt_ ficarão todas as instalações de bibliotecas e framework que serão utilizados na aplicação do microservices. As bibliotecas devem ficar separadas por linha, visto que usaremos um comando para uma instalação recursiva.
 
 ~~~ requirements
 requirements.txt
@@ -58,7 +58,7 @@ pip install -r requeriments.txt
 
 ## Docker-Compose
 
-No arquivo _docker-compose-microservice1.yml,_ iremos configurar a inicialização da imagem do serviço. Será feito o Build da imagem que criaremos posteriormente, apontado a Network que criamos juntamente com os serviços logo no início do projeto.
+No arquivo _docker-compose-microservice1.yml,_ configuraremos a inicialização da imagem do serviço. Será feito o Build da imagem que criaremos posteriormente, apontado a Network que criamos juntamente aos serviços logo no início do projeto.
 
 ~~~ docker
 version: "3.7"
@@ -75,7 +75,7 @@ networks:
 
 ## Dockerfile
 
-No arquivo Dockerfile iremos configurar a imagem de nosso primeiro microservices, contendo as variáveis de ambiente adequadas para o serviço. Diferente do imagem do python que usamos na API, no microservice precisaremos instalar a imagem completa do python, sendo ela: python:3.8
+No arquivo Dockerfile iremos configurar a imagem de nosso primeiro microservices, contendo as variáveis de ambiente adequadas para o serviço. Diferente da imagem do python que usamos na API, no microservice precisaremos instalar a imagem completa do python, sendo ela: python:3.8.
 
 ~~~ docker
 FROM python:3.8
@@ -107,9 +107,9 @@ class Main():
         self.RMQ_WORKER = RabbitWorker()
 ~~~
 
-Feito isso, criaremos um método chamado _consume\_queue,_ que consumirá a fila que desejamos. Nesse caso será _user,_ e posterior o consumo, irá disparar uma função para o processamento do dado recebido da fila. Nesse momento não iremos criar a função de processamento, porem iremos apenas nomeá-la no lugar correto.
+Feito isso, criaremos um método chamado _consume\_queue,_ que consumirá a fila que desejamos. Nesse caso será _user,_ e posteriormente o consumo disparará uma função para o processamento do dado recebido da fila. Nesse momento não iremos criar a função de processamento, porem iremos apenas nomeá-la no lugar correto.
 
-Com o comando _basic\_consume_ iremos consumir a fila _user_, no on\_message\_callback será disparado a função para o processamento da informação recebida na fila.
+Com o comando _basic\_consume_ consumiremos a fila _user_, no on\_message\_callback será disparado a função para o processamento da informação recebida na fila.
 
 Com o comando _start\_consuming,_ é processado o evento de I/O até que todos as mensagens sejam processadas.
 

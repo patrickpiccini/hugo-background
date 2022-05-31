@@ -14,9 +14,10 @@ weight: 10
 
 ---
 
-A um tempo desejava entender melhor como os tão famosos microsserviços conseguem trabalhar individualmente porem todos conectados. Foi então que decidi projetar uma pequena aplicação onde iria me aprofundar nesses conhecimentos, e que também iria me desafia a criar uma aplicação completa seguindo o **Software Development Life Circle**. Que parte desde a criação da ideia, até o deploy.
+Há um tempo eu desejava entender melhor como os tão famosos microsserviços conseguem trabalhar individualmente, porém todos conectados. Foi então que decidi projetar uma pequena aplicação onde iria me aprofundar nesses conhecimentos, e que também me desafiaria a criar uma aplicação completa seguindo o **Software Development Life Circle**. Partindo desde a criação da ideia, até o deploy.
 
-Isso pode ser representado da seguinte fluxo:
+
+Isso pode ser representado conforme o seguinte fluxo:
 
 ![img1](/images/microservice_project/img1.jpg)
 
@@ -24,7 +25,7 @@ Então, meu nome é Patrick Berlatto Piccini, e esse é meu projeto completo de 
 
 ## Entendimento do problema
 
-Nesse projeto, utilizarei algumas ferramentas contidas na OCI (Oracle Claud Infraestructure) visto que, recentemente (Fevereiro 2022) passei na certificação &quot;Oracle Cloud Infrastructure Foundations 2021 Associate&quot;. Se você desejar seguir os passos da criação da aplicação, e desenvolver junto comigo o código, é opcional utilizar o OCI.
+Nesse projeto, utilizarei algumas ferramentas contidas na OCI (Oracle Claud Infraestructure) visto que, recentemente (Fevereiro 2022) passei na certificação &quot;Oracle Cloud Infrastructure Foundations 2021 Associate&quot;. Se você desejar seguir os passos da criação da aplicação e desenvolver junto comigo o código, é opcional utilizar o OCI.
 
 Vamos começar...
 
@@ -44,9 +45,9 @@ O segundo será um serviço de OS (ordem de serviço) que deverá conter no cada
 
 A arquitetura da aplicação será a seguinte: criaremos uma API que será responsável por distribuir as requisições através de um broker de mensagens chamado RabbitMQ, e também criar as filas e tabelas necessárias para a aplicação.
 
-Nesse broker irá ter duas filas onde a API fará a separação das mensagens e enviará ao seu devido destino, onde teremos dois microservices, uma para _usuários_, e outro para os _orders_. Cada microsserviço é conectado a um banco de dados Postgres onde será armazenado as informações dos _usuários_ e dos _orders._
+Nesse broker, terão duas filas onde a API fará a separação das mensagens e enviará ao seu devido destino, onde teremos dois microsserviços, uma para _usuários_, e outro para os _orders_. Cada microsserviço é conectado a um banco de dados Postgres onde serão armazenadas as informações dos _usuários_ e dos _orders._
 
-Juntamente a API, haverá uma camada de memória cache onde utilizaremos o Redis para fazer essa função. Então, caso uma requisição já tenha sido feita, a API irá verificar antes no dados em Cache se já existe essa informação, assim o usuário terá o retorno muito mais rápido.
+Juntamente a API, haverá uma camada de memória cache onde utilizaremos o Redis para fazer essa função. Então, caso uma requisição já tenha sido feita, a API irá verificar antes nos dados em Cache se já existe essa informação. Assim, o usuário terá o retorno muito mais rápido.
 
 ![img2](/images/microservice_project/img2.jpg)
 

@@ -25,9 +25,9 @@ Como desenvolvi os códigos fora de nossa VM da OCI, o Git é o fator principal 
 
 Logado no usuário **devel\_user** , iniciei o cloud shell para conectar-se ao VM criada através do SSH Connection.
 
-\* Detalhe, essa conexão pode ser feita de qualquer terminal ou computador que tenha acesso ao SSH Connection, desde que se tenha cadastrado na hora da criação da VM a SSH-KEY da máquina que onde irá se conectar.
+\* Detalhe, essa conexão pode ser feita de qualquer terminal ou computador que tenha acesso ao SSH Connection, desde que se tenha cadastrado na hora da criação da VM a SSH-KEY da máquina que onde se conectará.
 
-Com o comando ssh opc@\&lt;ip\_public\&gt; entrei na máquina e comecei a fazer a instalação com o pacote de instalação Dandified YUM (DNF) no Oracle Linux 8.
+Com o comando **ssh opc@\<ip\_public\>** entrei na máquina e comecei a fazer a instalação com o pacote de instalação Dandified YUM (DNF) no Oracle Linux 8.
 
 ## Instalar Docker
 
@@ -92,4 +92,4 @@ source /etc/bashrc
 
 ## Resumo
 
-Nesse Step, nos conectamos a instancia da OCI e instalamos algumas dependências para o nosso ambiente de produção. Instalamos o Docker, Docker-Compose e Git.
+Nesse Step, nos conectamos a instância da OCI e instalamos algumas dependências para o nosso ambiente de produção. Instalamos o Docker, Docker-Compose e Git.

@@ -17,7 +17,7 @@ weight: 10
 - [Resumo](#resumo)
 ---
 
-Nesse passo, iremos começar a criar o rosto da API. Irei explicar como estruturei as rotas para a conexão utilizando Flask, e como funciona o disparo das funções das rotas. Criaremos a própria imagem para futuramente rodar a aplicação utilizando Dockerfile, juntamente com um Docker-Compose para subir as instancias Docker, e por fim, farei um teste de conexão localmente as rotas que criei.
+Nesse passo, iremos começar a criar o rosto da API. Irei explicar como estruturei as rotas para a conexão utilizando Flask, e como funciona o disparo das funções das rotas. Criaremos a própria imagem para futuramente rodar a aplicação utilizando Dockerfile, juntamente a um Docker-Compose para subir as instancias Docker. Por fim, farei um teste de conexão localmente as rotas que criei.
 
 No diretório raiz, criaremos a pasta API com os seguintes arquivos:
 
@@ -32,7 +32,7 @@ MS-application
 
 ## Requirements
 
-No arquivo _requeriments.txt_ irão ficar todas as instalações de bibliotecas e framework que será utilizado na aplicação da API. As bibliotecas devem ficar separadas por linha, visto que usaremos um comando para uma instalação recursiva.
+No arquivo _requeriments.txt_ ficarão todas as instalações de bibliotecas e framework que serão utilizadas na aplicação da API. As bibliotecas devem ficar separadas por linha, visto que usaremos um comando para uma instalação recursiva.
 
 ~~~ requirements
 requirements.txt
@@ -51,13 +51,13 @@ pip install -r requeriments.txt
 
 ## Criação API
 
-Dentro o arquivo _server.py_ iremos criar uma espécie de API-Gateway, onde ela será responsável apenas por distribuir as informações para as filas do rabbit. Cada rota terá sua funcionalidade, como **create\_user** para criar um usuário, **show\_all\_user** para mostrar todos os usuários. A mesma lógica será aplicada referente aos **orders** , como **create\_order, list\_order** e assim sucessivamente.
+Dentro o arquivo _server.py_ iremos criar uma espécie de API-Gateway, onde ela será responsável apenas por distribuir as informações para as filas do rabbit. Cada rota terá sua funcionalidade, como **create\_user** para criar um usuário, e **show\_all\_user** para mostrar todos os usuários. A mesma lógica será aplicada referente aos **orders** , como **create\_order, list\_order** e assim sucessivamente.
 
-Irei mostrar apenas a criação de uma das rotas, pois a estrutura será a mesma para todas as outras, basta altera o nome da rota e função que será disparada após acessá-la.
+Mostrarei apenas a criação de uma das rotas, pois a estrutura será a mesma para todas as outras, basta alterar o nome da rota e função que será disparada após acessá-la.
 
-Primeiro, deve-se importar o framework **Flask** juntamente com a funcionalidade **request.**
+Primeiro, deve-se importar o framework **Flask** juntamente a funcionalidade **request.**
 
-Devemos criar uma classe chamada **Api\_server** e instanciar o Flask a variável **app.** Após isso, para definir uma rota iremos utilizar o @app.route(&quot;rota&quot;, method), onde apontaremos _&quot;/user/create\_user/&quot;_ como destino_,_ e o método que essa rota irá aceitar será somente **POST.**
+Devemos criar uma classe chamada **Api\_server** e instanciar o Flask a variável **app.** Após isso, para definir uma rota iremos utilizar o @app.route(&quot;rota&quot;, method), onde apontaremos /user/create\_user/ como destino, sendo o **POST** o único método que essa rota irá aceitar.
 
 Abaixo da rota fica a função que será disparada após ser acessada, que nomearemos de **create\_user().** Dentro da &#39;def&#39;, faremos uma verificação se o method é o mesmo que esperamos nessa função. Caso isso seja atendido, coloquei como teste, um return que apenas mostrará o que enviamos no corpo da requisição. Caso não atenda, será mostrado um erro referente ao método enviado.
 
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     APP.app.run('0.0.0.0', 7000)
 ~~~
 
-Para testar, executei o arquivo _server.py_ e enviei um JSON como corpo da requisição para a rota que criei anteriormente, juntamente com o método POST:
+Para testar, executei o arquivo _server.py_ e enviei um JSON como corpo da requisição para a rota que criei anteriormente, juntamente ao método POST:
 
 ![img25](/images/microservice_project/img25.jpg)
 

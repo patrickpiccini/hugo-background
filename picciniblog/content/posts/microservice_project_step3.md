@@ -17,7 +17,7 @@ weight: 10
 
 Nesse próximo passo, parto do pressuposto que meu ambiente já está configurado e com todas as instalações feitas, assim, posso começar a criar as primeiras linhas de código.
 
-Devemos começar criando uma pasta chamada _MS-Application._ Essa pasta será onde iremos criar todos os microsserviços, configuração de containers de serviço, e mais alguns detalhes, que será mostrado no decorrer das publicações.
+Devemos começar criando uma pasta chamada _MS-Application._ Essa pasta será onde iremos criar todos os microsserviços, configuração de containers de serviço, e mais alguns detalhes, que serão mostrados no decorrer das publicações.
 
 Na raiz da pasta, criamos um arquivo chamado _docker-compose-services.yml._
 
@@ -45,7 +45,7 @@ networks:
           gateway: 10.5.0.1
 ~~~
 
-Nos serviços, iniciamos configurando o RabbitMQ. Utilizaremos a imagem _rabbitmq:3-management-alpine,_ que é uma imagem mínima do Docker baseada no Alpine Linux com um índice de pacotes completo e apenas 5 MB de tamanho_._ Nas variáveis de ambiente é deixado com o valor padrão o user, password e host, que será utilizado posteriormente para conectar ao manager do rabbit. Nas portas, devemos colocar 15672 para o manager e 5672 para o servidor. E por fim, iremos configurar o contêiner para ficar dentro da Network que foi criada anteriormente, apontando também um ip estático para essa instancia.
+Nos serviços, iniciamos configurando o RabbitMQ. Utilizaremos a imagem _rabbitmq:3-management-alpine,_ que é uma imagem mínima do Docker baseada no Alpine Linux com um índice de pacotes completo e apenas 5 MB de tamanho. Nas variáveis de ambiente é deixado com o valor padrão o user, password e host, que será utilizado posteriormente para conectar ao manager do rabbit. Nas portas, devemos colocar 15672 para o manager e 5672 para o servidor. E por fim, iremos configurar o contêiner para ficar dentro da Network que foi criada anteriormente, apontando também um ip estático para essa instancia.
 
 [Alpine](https://hub.docker.com/_/alpine)
 
@@ -67,7 +67,7 @@ services:
         ipv4_address: 10.5.0.10
 ~~~
 
-A estrutura dos próximos serviços é bem semelhante a essa primeira, com apenas alguns detalhes como diferença. No Postgres, utilizaremos a imagem _postgres:13_, iremos indicar as variáveis padrões do user e password para conexão a instancia, apontaremos a porta padrão 5432, criaremos um volume compartilhado de _.data_ para _/data/,_ configuraremosaNetwork com o ip estático, e um detalhe muito importante, será colocado o parâmetro _restart: Always_ que fará com que a instancia seja reiniciada caso pare de funcionar. Se for interrompido manualmente, ele será reiniciado somente quando o daemon do Docker for reiniciado ou o próprio contêiner for reiniciado manualmente.
+A estrutura dos próximos serviços é bem semelhante a essa primeira, com apenas alguns detalhes como diferença. No Postgres, utilizaremos a imagem _postgres:13_, iremos indicar as variáveis padrões do user e password para conexão a instância, apontaremos a porta padrão 5432, criaremos um volume compartilhado de _.data_ para _/data/,_ configuraremosaNetwork com o ip estático, e um detalhe muito importante, será colocado o parâmetro _restart: Always_ que fará com que a instância seja reiniciada caso pare de funcionar. Se for interrompido manualmente, ele será reiniciado somente quando o daemon do Docker for reiniciado ou o próprio contêiner for reiniciado manualmente.
 
 ~~~ docker
   postgres:
@@ -87,7 +87,7 @@ A estrutura dos próximos serviços é bem semelhante a essa primeira, com apena
         ipv4_address: 10.5.0.11
 ~~~
 
-Para ter uma parte visual do banco de dados, faremos a criação de uma instância com o PgAdmin, que poderemos conectar ao servidor do postgres via Web. Sendo assim, iremos utilizar a imagem _dpage/pgadmin4,_ com as variáveis de e-mail e password para entrarmos na página web. Iremos apontar a porta de 16543/80 (external/internal), compartilharemos os volumes./data/:/data/ e ./postgres-backup:/var/lib/postgresql/backups, iremos configurar a network com um ip estático, e colaremos uma dependência no parâmetro _depends\_on – postgres._ Isso fará com o a instancia do PgAdmin só seja criada, após a criação da instancia do postgres.
+Para ter uma parte visual do banco de dados, faremos a criação de uma instância com o PgAdmin, que poderemos conectar ao servidor do postgres via Web. Sendo assim, iremos utilizar a imagem _dpage/pgadmin4,_ com as variáveis de e-mail e password para entrarmos na página web. Iremos apontar a porta de 16543/80 (external/internal), compartilharemos os volumes./data/:/data/ e ./postgres-backup:/var/lib/postgresql/backups, iremos configurar a network com um ip estático, e colaremos uma dependência no parâmetro _depends\_on – postgres._ Isso fará com o a instância do PgAdmin só seja criada, após a criação da instância do postgres.
 
 ~~~ docker
   pgadmin:
@@ -108,7 +108,7 @@ Para ter uma parte visual do banco de dados, faremos a criação de uma instânc
         ipv4_address: 10.5.0.12
 ~~~
 
-E para camada de cache, iremos criar uma instancia com Redis utilizando a imagem redis:alpine, apontando a porta padrão 6379, e configurando a Network com um ip estático.
+E para camada de cache, iremos criar uma instância com Redis utilizando a imagem _redis:alpine_, apontando a porta padrão 6379, e configurando a Network com um ip estático.
 
 ~~~ docker
   redis:
@@ -127,11 +127,11 @@ No final, teremos vários containers rodando dentro de uma Rede, tendo algo pare
 
 ## Teste na OCI
 
-Agora que temos pronto o Docker-Compose com todos os serviços que utilizaremos, faço um teste dentro da VM que criamos na OCI. Para conseguir compartilhar o código, faço _um git commit_ de minha pasta MS-Application, e dentro da instancia OCI dou um _git pull_ para baixar.
+Agora que temos pronto o Docker-Compose com todos os serviços que utilizaremos, devemos fazer um teste dentro da VM que criamos na OCI. Para conseguir compartilhar o código, faço _um git commit_ de minha pasta MS-Application, e dentro da instância OCI dou um _git pull_ para baixar.
 
-OBS: Não entrarei em detalhes nos comandos do git, caso tenha alguma dúvida especifica, consulte a documentação oficial: [https://comandosgit.github.io/](https://comandosgit.github.io/)
+OBS: Não entrarei em detalhes nos comandos do git, caso tenha alguma dúvida especifica, consulte a documentação oficial: [**https://comandosgit.github.io/**](https://comandosgit.github.io/)
 
-Dentro a instancia, inicio meus serviços com o comando _docker-compose -f docker-compose-services.yml up,_ e passo o nome do arquivo que deverá ser iniciado.
+Dentro a instância, inicio meus serviços com o comando _docker-compose -f docker-compose-services.yml up,_ e passo o nome do arquivo que deverá ser iniciado.
 
 Nesse momento começará a baixar as imagens dos contêineres.
 
@@ -141,11 +141,11 @@ Nesse momento começará a baixar as imagens dos contêineres.
 
 ![img19](/images/microservice_project/img19.jpg)
 
-Agora que está tudo rodando, pude fazer um teste me conectando ao manager do RabbitMQ pela Web. Porém como a aplicação está em cloud, é necessário que nas configurações da VNC do projeto, seja expostas as portas que iremos utilizar para nos conectar externamente.
+Agora que está tudo rodando, pude fazer um teste me conectando ao manager do RabbitMQ pela Web. Porém como a aplicação está em cloud, é necessário que nas configurações da VNC do projeto, sejam expostas as portas que iremos utilizar para nos conectar externamente.
 
 ![img20](/images/microservice_project/img20.jpg)
 
-Na OCI, em Networking \&gt; Virtual Cloud Networks \&gt; sua\_vnc \&gt; Security List Details \&gt; Ingress Rules. iremos adicionar as portas que utilizaremos.
+Na OCI, em Networking > Virtual Cloud Networks > sua\_vnc > Security List Details > Ingress Rules. iremos adicionar as portas que utilizaremo
 
 ![img21](/images/microservice_project/img21.jpg)
 
@@ -159,4 +159,4 @@ Após a liberação da porta, consegui ter acesso aos meus contêineres, tanto o
 
 ## Resumo
 
-Nesse Step, criamos o arquivo _docker-compose-services.yml_ que é responsável por iniciar os servidores RabbitMQ, Postgres e Redis, juntamente com as interfaces PgAdmin e RabbitManager. Foi liberado as portas dos servidores para visualização externa, e também foi feito um teste acessando as interfaces externamente à OCI, tendo sucesso na conexão.
+Nesse Step, criamos o arquivo _docker-compose-services.yml_ que é responsável por iniciar os servidores RabbitMQ, Postgres e Redis, juntamente as interfaces PgAdmin e RabbitManager. Foram liberadas as portas dos servidores para visualização externa, e também foi feito um teste acessando as interfaces externamente à OCI, tendo sucesso na conexão.
