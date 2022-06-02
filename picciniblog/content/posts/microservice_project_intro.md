@@ -11,8 +11,11 @@ weight: 10
 ---
 
 ## Table of Contents
-
+- [Entendimento do problema](#entendimento-do-problema)
+- [Objetivo](#objetivo)
+- [Arquitetura do Projeto Completo](#arquitetura-do-projeto-completo)
 ---
+
 
 Há um tempo eu desejava entender melhor como os tão famosos microsserviços conseguem trabalhar individualmente, porém todos conectados. Foi então que decidi projetar uma pequena aplicação onde iria me aprofundar nesses conhecimentos, e que também me desafiaria a criar uma aplicação completa seguindo o **Software Development Life Circle**. Partindo desde a criação da ideia, até o deploy.
 
@@ -115,6 +118,4 @@ MS-application
     └───rabbitmq_controller
             rabbit_worker.py
             __init__.py
-
-
 ~~~
