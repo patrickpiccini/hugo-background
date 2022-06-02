@@ -9,6 +9,7 @@ type:
 title: Microservice Project – Step 3
 weight: 10
 ---
+![microservices](/images/microservice_project/microservices.png)
 ## Table of Contents
 - [Criação do Docker-Compose-Services](#cria%C3%A7%C3%A3o-do-docker-compose-services)
 - [Teste na OCI](#teste-na-oci)

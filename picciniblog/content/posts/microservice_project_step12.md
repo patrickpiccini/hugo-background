@@ -9,6 +9,7 @@ type:
 title: Microservice Project – Step 12
 weight: 10
 ---
+![microservices](/images/microservice_project/microservices.png)
 ## Table of Contents
 - [Instalação](#instala%C3%A7%C3%A3o)
 - [Inicialização do Redis](#inicializa%C3%A7%C3%A3o-do-redis)

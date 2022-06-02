@@ -9,6 +9,7 @@ type:
 title: Microservice Project – Step 8
 weight: 10
 ---
+![microservices](/images/microservice_project/microservices.png)
 ## Table of Contents
 - [Tag API](#tag-api)
 - [Controlador DataBase](#controlador-database)

@@ -9,6 +9,7 @@ type:
 title: Microservice Project – Step 6
 weight: 10
 ---
+![microservices](/images/microservice_project/microservices.png)
 ## Table of Contents
 - [Queues](#queues)
 - [Consumo da classe RabbitQueue e ConnectionDatabase](#consumo-da-classe-rabbitqueue-e-connectiondatabase)

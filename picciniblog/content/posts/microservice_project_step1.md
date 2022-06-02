@@ -9,6 +9,7 @@ type:
 title: Microservice Project – Step 1
 weight: 10
 ---
+![microservices](/images/microservice_project/microservices.png)
 
 ## Table of Contents
 - [Criação do Compartment](#cria%C3%A7%C3%A3o-do-compartment)

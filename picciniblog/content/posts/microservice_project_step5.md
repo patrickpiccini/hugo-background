@@ -9,6 +9,7 @@ type:
 title: Microservice Project – Step 5
 weight: 10
 ---
+![microservices](/images/microservice_project/microservices.png)
 ## Table of Contents
 - [Postgres](#postgres)
     - [Create\_tables](#create%5C_tables)

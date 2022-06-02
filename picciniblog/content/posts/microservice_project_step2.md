@@ -9,6 +9,7 @@ type:
 title: Microservice Project – Step 2
 weight: 10
 ---
+![microservices](/images/microservice_project/microservices.png)
 ## Table of Contents
 - [Entrar na Instancia via shell](#entrar-na-instancia-via-shell)
 - [Instalar Docker](#instalar-docker)

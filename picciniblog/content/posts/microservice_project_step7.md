@@ -9,6 +9,7 @@ type:
 title: Microservice Project – Step 7
 weight: 10
 ---
+![microservices](/images/microservice_project/microservices.png)
 ## Table of Contents
 - [Config](#config)
 - [Requeriments](#requeriments)

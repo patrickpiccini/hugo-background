@@ -9,6 +9,7 @@ type:
 title: Microservice Project – Step 9
 weight: 10
 ---
+![microservices](/images/microservice_project/microservices.png)
 ## Table of Contents
 - [Argon2](#argon2)
 - [Hash de Senha](#hash-de-senha)

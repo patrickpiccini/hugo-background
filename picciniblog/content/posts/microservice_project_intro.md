@@ -9,7 +9,7 @@ type:
 title: Um projeto completo de Microservices
 weight: 10
 ---
-
+![microservices](/images/microservice_project/microservices.png)
 ## Table of Contents
 - [Entendimento do problema](#entendimento-do-problema)
 - [Objetivo](#objetivo)
