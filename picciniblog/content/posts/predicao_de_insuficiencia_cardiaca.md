@@ -1,7 +1,7 @@
 ---
 author:
   name: "Patrick Piccini"
-date: 2022-06-15T13:00:52-01:00
+date: 2025-06-15T13:00:52-01:00
 linktitle: Predição de Insuficiência Cardiaca
 type:
 - post
