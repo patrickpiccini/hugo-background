@@ -12,7 +12,8 @@ Working with Back-End Development since 2020, I have developed medium-scale proj
 Most of my experience comes down to Python, Node.js SQL, NoSQL, API-Rest and Microservices.
 
 ## Certificates
-!["drawing"](/images/user/Python.png)
+!["certificates"](/images/user/certificates.png)
 
 
-
+## Skills
+!["tecnologis"](/images/user/tecnologis.png)
