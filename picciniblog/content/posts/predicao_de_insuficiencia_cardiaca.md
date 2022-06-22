@@ -2,11 +2,11 @@
 author:
   name: "Patrick Piccini"
 date: 2022-06-21T20:00:52-01:00
-linktitle: Predição de Insuficiência Cardiaca
+linktitle: Predição de Insuficiência Cardíaca
 type:
 - post
 - posts
-title: Predição de Insuficiência Cardiaca
+title: Predição de Insuficiência Cardíaca
 weight: 10
 ---
 !["img"](/images/insuficiencia_cardiaca/img.jpg)
@@ -22,7 +22,7 @@ weight: 10
   - [Visualização](#visualiza%C3%A7%C3%A3o)
   - [Quais atributos tem relação?](#quais-atributos-tem-rela%C3%A7%C3%A3o)
   - [Distribuição de algumas colunas do DataSet](#distribui%C3%A7%C3%A3o-de-algumas-colunas-do-dataset)
-  - [Calculo de Insuficiência Cardiaca](#calculo-de-insufici%C3%AAncia-cardiaca)
+  - [Calculo de Insuficiência Cardíaca](#calculo-de-insufici%C3%AAncia-cardiaca)
   - [Inicio de Treinamento de Modelos](#inicio-de-treinamento-de-modelos)
       - [Separação de Dados](#separa%C3%A7%C3%A3o-de-dados)
   - [Desision Tree](#---------desision-tree-train---------)
@@ -200,8 +200,8 @@ Nesse passo da AED iremos plotar alguns gráficos onde consiguiremos ter uma an�
 - Iremos calcular a porcentagem de casos de pessoas com Insuficiência Cardíacas e sem Insuficiência Cardía
 
 ~~~ python
-print("paciente com Insuficiência Cardiacas:", heart_df.query('Doenca_Cardiaca == 1').shape[0])
-print("paciente sem Insuficiência Cardiaca:", heart_df.query('Doenca_Cardiaca == 0').shape[0])
+print("paciente com Insuficiência Cardíacas:", heart_df.query('Doenca_Cardiaca == 1').shape[0])
+print("paciente sem Insuficiência Cardíaca:", heart_df.query('Doenca_Cardiaca == 0').shape[0])
 
 labels = [1,0]
 sizes = heart_df['Doenca_Cardiaca'].value_counts()
@@ -212,8 +212,8 @@ ax1.pie(sizes, labels=labels, autopct='%1.1f%%',shadow=True, startangle=90 ,colo
 ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 plt.show()
 ~~~
-- paciente com Insuficiência Cardiacas: 508
-- paciente sem Insuficiência Cardiaca: 410
+- paciente com Insuficiência Cardíacas: 508
+- paciente sem Insuficiência Cardíaca: 410
 
 !["img7"](/images/insuficiencia_cardiaca/img7.png)
 
@@ -261,7 +261,7 @@ plt.show()
 
 !["img10"](/images/insuficiencia_cardiaca/img10.png)
 
-## Calculo de Insuficiência Cardiaca
+## Calculo de Insuficiência Cardíaca
 
 ~~~ python
 fig, axes = plt.subplots(3, 2, figsize=(20, 10))
@@ -282,9 +282,9 @@ odemos perceber que Homens tem maiores chances de ter Insuficiencia Cardíaca me
 ### Grafico Tipo de dor no peito
 - TA: Angina Típica, ATA: Angina Atípica, NAP: Dor Não Anginosa, ASY: Assintomática
 
-Nota-se que de toda a classe Tipo_Dor_Peito a que mais se destaca é o classificador ASY, que representa uma dor Assintomática, em outras palavras, uma dor com poucos sintomas, ou pouco visivel. Vemos que o risco de ter insuficiência cardiaca é extremamente alta contendo esse tipo de dor.
+Nota-se que de toda a classe Tipo_Dor_Peito a que mais se destaca é o classificador ASY, que representa uma dor Assintomática, em outras palavras, uma dor com poucos sintomas, ou pouco visivel. Vemos que o risco de ter insuficiência cardíaca é extremamente alta contendo esse tipo de dor.
 
-No tipo TA, mesmo tendo um pequeno volume de dados, percebe-se que a quantidade de casos com e sem insuficiência é quase balanceado. Para esses casos deve-se ter mais atenção na hora dos diagnósticos para que o paciente não seja classificado sem a doença cardiaca.
+No tipo TA, mesmo tendo um pequeno volume de dados, percebe-se que a quantidade de casos com e sem insuficiência é quase balanceado. Para esses casos deve-se ter mais atenção na hora dos diagnósticos para que o paciente não seja classificado sem a doença cardíaca.
 
 Devemos perceber que nos tipos NAP e ATA temos um menor volume de dados contendo Insuficiência Cardíaca comparado com ASY e TA.
 
@@ -298,9 +298,9 @@ dentifica-se que a maioria dos pacientes, independente do resultado do eletrocar
 - Exame de Teste de Esforço
 - ST_Slope: inclinação do segmento ST do exercício de pico [Up: upsloping, Flat: flat, Down: downsloping]
 
-Nos resultados do ST_Slope pessoas com segmento ST maiores(UP), não tendem a ter insuficiencia cardiaca, visto que os bastimentos estão com um BPM alto.
+Nos resultados do ST_Slope pessoas com segmento ST maiores(UP), não tendem a ter insuficiencia cardíaca, visto que os bastimentos estão com um BPM alto.
 
-Se mesmo no Teste de esforço físico o segmento ST estiver sem muita variação(Flat), a tendência a ter insuficiência cardiaca é bem alta. A mesma coisa quando o segmento ST estiver baixo(Down).
+Se mesmo no Teste de esforço físico o segmento ST estiver sem muita variação(Flat), a tendência a ter insuficiência cardíaca é bem alta. A mesma coisa quando o segmento ST estiver baixo(Down).
 
 ### Conjunto Idade
 O conjunto de idade foi criado na parte de discretização justamente para categorizar cara pessoa por seu devido conjunto de idade sende eles:
@@ -309,7 +309,7 @@ O conjunto de idade foi criado na parte de discretização justamente para categ
 - [Adulto] - 20 à 60 
 - [Idoso] - 60 à 100 
 
-Como podemos perceber, no DataSet não ha nenhum registro de pessoas da categoria "Criança" e "Adolecente". Nota-se que a 50% de de todos os Adultos tem alguma insuficiência cardiaca, e tambem cerca de 75% dos Idosos tambem foram diagnosticado com essa doença.
+Como podemos perceber, no DataSet não ha nenhum registro de pessoas da categoria "Criança" e "Adolecente". Nota-se que a 50% de de todos os Adultos tem alguma insuficiência cardíaca, e tambem cerca de 75% dos Idosos tambem foram diagnosticado com essa doença.
 
 Iremos retirar a coluna de idade, visto que com a nova coluna de "conjunto_idade" poderemos utilizar facilmente no treinamento dos modelos.
 
