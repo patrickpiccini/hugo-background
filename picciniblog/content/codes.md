@@ -14,8 +14,8 @@ weight: 10
 
 
 
-
-
+- [Predição de Insuficiência Cardiaca]()
+---
 -  [Um projeto completo de Microservices](https://github.com/patrickpiccini/MS-Application)
 ---
 -  [Data Analytcs - Spotify Wrapped](https://github.com/patrickpiccini/DataScience_Spotify_Wrapped)

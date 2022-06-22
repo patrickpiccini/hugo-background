@@ -1,7 +1,7 @@
 ---
 author:
   name: "Patrick Piccini"
-date: 2025-06-15T13:00:52-01:00
+date: 2022-06-20T13:00:52-01:00
 linktitle: Predição de Insuficiência Cardiaca
 type:
 - post
@@ -34,6 +34,7 @@ weight: 10
   - [Matriz Confusão](#matriz-confus%C3%A3o)
   - [Cross-Validation](#cross-validation)
   - [Curva ROC](#curva-roc)
+  - [Insigths](#insigths)
 ---
 
 
@@ -599,3 +600,19 @@ plt.show()
 
 ![img22](/images/insuficiencia_cardiaca/img22.png)
 
+
+## Insigths
+
+Após toda a análise do problema e entendimento de algumas hipóteses vistas na etapa de Visualização, criamos o conjunto de treino e testes e aplicamos em diferentes algoritmos. Iniciamos o treinamento dos algoritmos com a tradicional Decision Tree, partindo para Random Forest, GussianNB e Logistic Regression. Para a precisão dos resultados dos treinamentos, aplicamos uma camada de Cross-Validation onde os modelos passaram por diferentes conjuntos de dados, resultando em score variados para validarmos a qualidade dos modelos.
+
+Após essa validação, identificamos que o modelo Random Forest se destacou com uma Acurácia media de 0.88 e uma derivação de 0.05, sendo o melhor resultado da acurácia de todos os algoritmos.
+
+Como estamos predizendo um problema de saúde, devemos ter o seguinte pensamento: caso o paciente vá a um médico é melhor que ele seja diagnosticado com uma doença cardíaca e previna, porem ele NÃO tem nenhum problema. Do que ele seja diagnosticado que não tem uma doença cardíaca, e, na verdade, ele TEM problema cardíaco.
+
+Logo, compreendemos que em nossos algoritmos devem conter um BAIXO índice de falsos negativos(FN). Analisando a matriz confusão, nota-se que dentre os quatro algoritmos, apenas um se destaca por conter poucos falsos negativos(FN), a Random Forest. Nota-se que enquanto os outros modelos chegam a 30 ou 32 FN, a Random Forest chega diminuir quase pela metade, chegando aos 18 FN.
+
+Para compararmos as probabilidades de acerto desses Falsos Negativos, devemos olhar para o maior Score de Recall, e novamente a Random Fores se destaca com seus 0.88 de assertividade.
+
+Com isso, entendemos que para predizermos a insuficiência cardíaca de um paciente, podemos utilizar nosso modelo treinado com Random Forest visto que comparamos os resultados de suas predições, e também testamos a qualidade do modelo comprovando a sua eficácia em seus resultados.
+
+Espero que tenha aproveitado todo o desenvolvimento do projeto, e que sua leitura tenha agregado conhecimentos.
