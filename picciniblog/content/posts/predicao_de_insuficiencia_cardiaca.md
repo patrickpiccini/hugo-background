@@ -9,7 +9,7 @@ type:
 title: Predição de Insuficiência Cardiaca
 weight: 10
 ---
-!["img"](http://www.bancodasaude.com/cdn/infosaude/article/insuficiencia-cardiaca.jpg)
+!["img"](/images/insuficiencia_cardiaca/img.jpg)
 
 ## Table of Contents
   - [DataSet](#dataset)
