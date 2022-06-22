@@ -14,7 +14,7 @@ weight: 10
 
 
 
-- [Predição de Insuficiência Cardiaca]()
+- [Predição de Insuficiência Cardiaca](https://github.com/patrickpiccini/heart-failure-prediction)
 ---
 -  [Um projeto completo de Microservices](https://github.com/patrickpiccini/MS-Application)
 ---
